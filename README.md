@@ -5,7 +5,7 @@
 <!-- <br /> -->
 <div align="center">
   <a href="https://github.com/ntu-se7-grp3/garang-guni-mobile">
-    <img src="./assets/icon.png" alt="Logo" width="160" height="160">
+    <img src="./assets/icons/logo.png" alt="Logo" width="160" height="160">
   </a>
 
   <h3 align="center">The Garang Guni</h3>
