@@ -1,0 +1,16 @@
+export const routes = {
+  HOME: "/(drawer)/(tabs)/home/Home",
+  PROFILE: "/(drawer)/(tabs)/profile/Profile",
+  BOOKINGS: "/(drawer)/(tabs)/schedule/Schedule",
+  DROP_OFF: "/(drawer)/(tabs)/drop-off/DropOff",
+  RATES: "/(drawer)/rates/Rates",
+  TRANSACTION_HISTORY: "/(drawer)/history/TransactionHistory",
+  CONTACT_US: "/(drawer)/(tabs)/contact-us/ContactUs",
+  SETTINGS: "/(drawer)/settings/Settings",
+  STARTING_PAGE: "/",
+  ONBOARDING: "/Onboarding",
+  SIGN_UP: "/(auth)/SignUp",
+  LOGIN: "/(auth)/Login",
+  LOGIN_SIGN_UP_WELCOME: "/(auth)/Welcome",
+  FORGOT_PASSWORD: "/(auth)/ForgotPassword",
+};
