@@ -9,14 +9,14 @@ import { useRouter } from "expo-router";
 import { hp, wp } from "../../common";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-import fakeRegisterReponse from "../../constants/fakeRegisterReponse.json";
+import fakeRegisterResponse from "../../constants/fakeRegisterResponse.json";
+import fakeGetUserResponse from "../../constants/fakeGetUserResponse.json";
 import { decodeJwt } from "../../utils/jwtUtils";
 import { useAuth } from "../../contexts/AuthContext";
 import { routes } from "../../constants/routes";
 
 const SignUp = () => {
   const router = useRouter();
-  const ROUTES = routes;
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -60,16 +60,22 @@ const SignUp = () => {
     try {
       setLoading(true);
       // Fake Response created using real response
-      const response = fakeRegisterReponse;
+      const response = fakeRegisterResponse;
       if (!response || response.status !== 201) {
         throw new Error("Unexpected response code");
       }
       const jwtToken = response.body.token;
       const decodedJwt = decodeJwt(jwtToken);
-      const userData = decodedJwt.payload;
+      const userId = decodedJwt.payload.id;
+      let userData = "";
+      // In actuality, this is used to call backend again.
+      if (userId) {
+        const userDataResponse = fakeGetUserResponse;
+        userData = userDataResponse.body;
+      }
       clearToken();
       saveToken(jwtToken, userData);
-      router.replace(ROUTES.STARTING_PAGE);
+      router.replace(routes.STARTING_PAGE);
     } catch (error) {
       if (error.response) {
         switch (error.response.status) {
@@ -155,7 +161,7 @@ const SignUp = () => {
           <Text style={styles.footerText}>Have an account?</Text>
           <Pressable
             onPress={() => {
-              router.push(ROUTES.LOGIN);
+              router.push(routes.LOGIN);
             }}
           >
             <Text
