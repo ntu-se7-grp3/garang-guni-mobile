@@ -37,7 +37,7 @@ const AppDrawer = (props) => {
             <Text style={styles.drawerProfileText}>
               {user.lastName + " " + user.firstName}
             </Text>
-            <Text style={styles.drawerProfileText}>{user.sub}</Text>
+            <Text style={styles.drawerProfileText}>{user.email}</Text>
           </>
         ) : (
           <Text style={styles.drawerProfileText}>Unregistered User</Text>
