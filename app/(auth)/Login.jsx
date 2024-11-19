@@ -5,7 +5,7 @@ import { theme } from "../../constants/theme";
 import { StatusBar } from "expo-status-bar";
 import BackButton from "../../components/BackButton";
 import Feather from "@expo/vector-icons/Feather";
-import { Link, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import { hp, wp } from "../../common";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
@@ -15,24 +15,41 @@ import { useAuth } from "../../contexts/AuthContext";
 import { routes } from "../../constants/routes";
 import PressableOpacity from "../../components/PressableOpacity";
 
+import * as yup from "yup";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+// Validation schema using Yup
+const schema = yup.object().shape({
+  email: yup
+    .string()
+    .required("Email is required")
+    .email("Invalid email format"),
+  password: yup.string().required("Password is required"),
+});
+
 const Login = () => {
   const router = useRouter();
   const ROUTES = routes;
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const { saveToken, clearToken } = useAuth();
 
-  const handleLogin = async () => {
-    if (email === "" || password === "") {
-      Alert.alert("Login", "Please fill all the fields!");
-      return;
-    }
+  // Initialize React Hook Form
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+    mode: "onChange", // Validates on every change
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
 
-    const formData = {
-      email,
-      password,
-    };
+  const handleLogin = async (formData) => {
+    // console.log("Form Data:", formData);
 
     try {
       setLoading(true);
@@ -92,27 +109,63 @@ const Login = () => {
           <Text style={{ fontSize: hp(1.5), color: theme.colors.text }}>
             Please Login to continue
           </Text>
-          <Input
-            icon={<Feather name="mail" size={24} color="black" />}
-            placeholder="Enter your email"
-            onChangeText={(newEmail) => setEmail(newEmail)}
+
+          <Controller
+            control={control}
+            name="email"
+            rules={{ required: true }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <>
+                <Input
+                  icon={<Feather name="mail" size={24} color="black" />}
+                  placeholder="Enter your email"
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                />
+                {errors.email && (
+                  <Text style={styles.errorText}>{errors.email.message}</Text>
+                )}
+              </>
+            )}
           />
 
-          <Input
-            icon={<Feather name="lock" size={24} color="black" />}
-            placeholder="Enter your password"
-            isPasswordField={true}
-            onChangeText={(newPassword) => setPassword(newPassword)}
+          <Controller
+            control={control}
+            name="password"
+            rules={{ required: true }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <>
+                <Input
+                  icon={<Feather name="lock" size={24} color="black" />}
+                  placeholder="Enter your password"
+                  isPasswordField={true}
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                />
+                {errors.password && (
+                  <Text style={styles.errorText}>
+                    {errors.password.message}
+                  </Text>
+                )}
+              </>
+            )}
           />
+
           <PressableOpacity onPress={() => router.push(ROUTES.FORGOT_PASSWORD)}>
             <Text style={styles.forgotPassword}>Forgot Password?</Text>
           </PressableOpacity>
 
-          <Button title={"Login"} loading={loading} onPress={handleLogin} />
+          <Button
+            title={"Login"}
+            loading={loading}
+            onPress={handleSubmit(handleLogin)}
+          />
         </View>
 
         <View style={styles.footer}>
-          <Text style={styles.footerText}>Dont have an account?</Text>
+          <Text style={styles.footerText}>Don't have an account?</Text>
           <Pressable
             onPress={() => {
               router.push(ROUTES.SIGN_UP);
@@ -169,5 +222,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: theme.colors.text,
     fontSize: hp(1.6),
+  },
+  errorText: {
+    color: theme.colors.rose,
+    fontSize: hp(1.5),
   },
 });
