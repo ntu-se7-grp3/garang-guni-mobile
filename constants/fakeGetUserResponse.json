@@ -1,5 +1,5 @@
 {
-    "status": 201,
+    "status": 200,
     "error_message": null,
     "headers": {
       "Content-Type": "application/json",
@@ -12,7 +12,19 @@
     },
     "content_type": "application/json",
     "body": {
-      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0QHRlc3QuY29tIiwiaWQiOiI5ZmJjZTRkNi04NzQxLTQzNzctOTZmYy1iZjM0YzdiMjFlODEiLCJmaXJzdE5hbWUiOiJ0ZXN0Rmlyc3QiLCJsYXN0TmFtZSI6InRlc3RsYXN0IiwiaWF0IjoxNzMxNzkyODk3LCJleHAiOjE3MzUzOTI4OTd9.m4s0yZtCHN6dBR1DDTQtUM6FPj7W1a9wso46AinDMyM"
+      "id":"0d6f3d07-3d58-4683-81a1-bda01616f310",
+      "firstName":"Jason",
+      "lastName":"Lim",
+      "email":"JasonLim@Gmail.com",
+      "password":"",
+      "role":null,
+      "contactNo":null,
+      "dob":null,
+      "gender":null,
+      "postalCode":null,
+      "address":null,
+      "floor":null,
+      "unitNumber":null
     },
     "forwarded_url": null,
     "redirected_url": null,

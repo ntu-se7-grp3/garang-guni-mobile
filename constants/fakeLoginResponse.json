@@ -1,0 +1,20 @@
+{
+    "status": 200,
+    "error_message": null,
+    "headers": {
+      "Content-Type": "application/json",
+      "X-Content-Type-Options": "nosniff",
+      "X-XSS-Protection": "0",
+      "Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+      "Pragma": "no-cache",
+      "Expires": "0",
+      "X-Frame-Options": "DENY"
+    },
+    "content_type": "application/json",
+    "body": {
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNvbkxpbUBHbWFpbC5jb20iLCJpZCI6IjQxYTA2ODY2LTA0YzgtNDRkYi1iZjE4LTg0NDYwNjRjMjg2YSIsImZpcnN0TmFtZSI6Ikphc29uIiwibGFzdE5hbWUiOiJMaW0iLCJpYXQiOjE3MzIwMzA2MDMsImV4cCI6MTczNTYzMDYwM30.8OO8XCQSveRDosdThp_-864tHcfAC4rlbhs_lGWaVy0"
+    },
+    "forwarded_url": null,
+    "redirected_url": null,
+    "cookies": []
+}
