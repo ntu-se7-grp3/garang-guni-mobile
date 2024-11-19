@@ -40,7 +40,7 @@ const TabLayout = () => {
           }}
         />
         <Tabs.Screen
-          name="schedule/Schedule"
+          name="schedule"
           options={{
             title: "Schedule",
             headerShown: false,
