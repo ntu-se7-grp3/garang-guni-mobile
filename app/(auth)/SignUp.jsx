@@ -69,7 +69,12 @@ const SignUp = () => {
   });
 
   const handleSignUp = async (formData) => {
-    // console.log("Form Data:", formData);
+    const { username, email, phoneNo, password, cfmPassword } = formData;
+
+    if (!username || !email || !phoneNo || !password || !cfmPassword) {
+      Alert.alert("Sign Up", "Please fill all the fields!");
+      return;
+    }
 
     try {
       setLoading(true);

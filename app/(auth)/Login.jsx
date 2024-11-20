@@ -49,7 +49,12 @@ const Login = () => {
   });
 
   const handleLogin = async (formData) => {
-    // console.log("Form Data:", formData);
+    const { email, password } = formData;
+
+    if (!email || !password) {
+      Alert.alert("Login", "Please fill all the fields!");
+      return;
+    }
 
     try {
       setLoading(true);
