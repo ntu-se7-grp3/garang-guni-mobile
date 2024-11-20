@@ -10,6 +10,7 @@ import { hp, wp } from "../../common";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import fakeLoginReponse from "../../constants/fakeLoginReponse.json";
+import fakeGetUserReponse from "../../constants/fakeGetUserResponse.json";
 import { decodeJwt } from "../../utils/jwtUtils";
 import { useAuth } from "../../contexts/AuthContext";
 import { routes } from "../../constants/routes";

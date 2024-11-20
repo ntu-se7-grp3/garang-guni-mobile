@@ -1,0 +1,32 @@
+{
+  "status": 200,
+  "error_message": null,
+  "headers": {
+    "Content-Type": "application/json",
+    "X-Content-Type-Options": "nosniff",
+    "X-XSS-Protection": "0",
+    "Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+    "Pragma": "no-cache",
+    "Expires": "0",
+    "X-Frame-Options": "DENY"
+  },
+  "content_type": "application/json",
+  "body": {
+    "id": "0d6f3d07-3d58-4683-81a1-bda01616f310",
+    "firstName": "testFirst",
+    "lastName": "testlast",
+    "email": "Test@test.com",
+    "password": "",
+    "role": null,
+    "contactNo": null,
+    "dob": null,
+    "gender": null,
+    "postalCode": null,
+    "address": null,
+    "floor": null,
+    "unitNumber": null
+  },
+  "forwarded_url": null,
+  "redirected_url": null,
+  "cookies": []
+}
