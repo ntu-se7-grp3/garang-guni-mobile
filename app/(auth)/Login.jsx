@@ -69,7 +69,14 @@ const Login = () => {
       }
       const jwtToken = response.body.token;
       const decodedJwt = decodeJwt(jwtToken);
-      const userData = decodedJwt.payload;
+      const userId = decodedJwt.payload.id;
+      let userData = "";
+      // In actuality, this is used to call backend again.
+      if (userId) {
+        const userDataResponse = fakeGetUserReponse;
+        userData = userDataResponse.body;
+      }
+
       // (To do?): Verify Jwt Signature using public key
       clearToken();
       saveToken(jwtToken, userData);

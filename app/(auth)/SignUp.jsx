@@ -85,7 +85,13 @@ const SignUp = () => {
       }
       const jwtToken = response.body.token;
       const decodedJwt = decodeJwt(jwtToken);
-      const userData = decodedJwt.payload;
+      const userId = decodedJwt.payload.id;
+      let userData = "";
+      if (userId) {
+        const userDataResponse = fakeGetUserReponse;
+        userData = userDataResponse.body;
+      }
+
       clearToken();
       saveToken(jwtToken, userData);
       router.replace(ROUTES.STARTING_PAGE);
