@@ -4,7 +4,7 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { usePathname } from "expo-router";
 import { theme } from "../constants/theme";
 import { hp } from "../common";
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 
 const AppDrawer = (props) => {
   const { user } = useAuth();
@@ -20,8 +20,13 @@ const AppDrawer = (props) => {
   });
 
   const userImage =
-    user && user.profile ? (
-      <Image source={{ uri: user.profile }} style={styles.drawerProfileImg} />
+    user && user.profileImg ? (
+      <Image
+        source={{
+          uri: `data:image/${user.profileImg.type};base64,${user.profileImg.img}`,
+        }}
+        style={styles.drawerProfileImg}
+      />
     ) : (
       <View style={styles.drawerSampleIcon}>
         <FontAwesome5 name="user" size={hp(15)} color="black" />
@@ -82,6 +87,7 @@ const styles = StyleSheet.create({
     borderRadius: hp(20) / 2,
     backgroundColor: theme.colors.whiteGreen,
     overflow: "hidden",
+    marginBottom: 5,
   },
   drawerSampleIcon: {
     justifyContent: "center",
