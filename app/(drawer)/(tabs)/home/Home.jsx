@@ -4,6 +4,7 @@ import { useFocusEffect, router } from "expo-router";
 import { routes } from "../../../../constants/routes";
 import { theme } from "../../../../constants/theme";
 import Button from "../../../../components/Button";
+import ScreenWrapper from "../../../../components/ScreenWrapper";
 
 import homeCoinImage from "../../../../assets/home/home-coin.png";
 import homeItem1Image from "../../../../assets/home/home-item1.png";
@@ -32,7 +33,7 @@ const Home = () => {
   };
 
   return (
-    <>
+    <ScreenWrapper bg={theme.colors.whiteGreen}>
       <StatusBar backgroundColor="transparent" barStyle="dark-content" translucent />
 
       <ScrollView
@@ -112,7 +113,7 @@ const Home = () => {
           />
         </View>
       </ScrollView>
-    </>
+    </ScreenWrapper>
   );
 };
 
