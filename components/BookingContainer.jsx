@@ -36,7 +36,7 @@ const BookingContainer = ({
         {content.map(
           ({ contentHeader, contentBody, contentList, contentImgs }, idx) => {
             return (
-              <React.Fragment key={idx}>
+              <View key={idx} style={{ marginBottom: 7 }}>
                 {contentHeader && (
                   <Text style={[styles.contentHeader, contentHeaderStyle]}>
                     {contentHeader}
@@ -76,7 +76,7 @@ const BookingContainer = ({
                     })}
                   </View>
                 )}
-              </React.Fragment>
+              </View>
             );
           }
         )}
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
   bookingContainer: {
     alignSelf: "stretch",
     backgroundColor: "white",
-    borderRadius: 8,
+    borderRadius: theme.radius.xxs,
     padding: wp(3),
     paddingTop: hp(2),
     paddingBottom: hp(2),
@@ -120,10 +120,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 10,
     marginLeft: 5,
+    marginBottom: 5,
   },
   date: {
     fontWeight: theme.fonts.fontWeight.bold,
-    fontSize: hp(3),
+    fontSize: hp(2.8),
   },
   contentContainer: {
     paddingLeft: 5,
@@ -132,7 +133,7 @@ const styles = StyleSheet.create({
   },
   contentHeader: {
     fontWeight: theme.fonts.fontWeight.bold,
-    fontSize: hp(2.3),
+    fontSize: hp(2),
   },
   contentList: {
     flexDirection: "row",
@@ -151,6 +152,6 @@ const styles = StyleSheet.create({
     height: hp(10),
   },
   buttonLink: {
-    borderRadius: 8,
+    borderRadius: theme.radius.xxs,
   },
 });
