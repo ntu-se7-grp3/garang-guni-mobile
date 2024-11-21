@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
   },
   forgotPassword: {
     textAlign: "right",
-    fontWeight: theme.fonts.semibond,
+    fontWeight: theme.fonts.fontWeight.semibold,
     color: theme.colors.text,
   },
   footer: {

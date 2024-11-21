@@ -14,4 +14,5 @@ export const routes = {
   LOGIN_SIGN_UP_WELCOME: "/(auth)/Welcome",
   FORGOT_PASSWORD: "/(auth)/ForgotPassword",
   SCHEDULE_PICKUP: "/(drawer)/(tabs)/schedule/SchedulePickUp",
+  CAMERA: "/camera/Camera",
 };
