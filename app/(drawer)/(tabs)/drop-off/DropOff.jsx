@@ -5,6 +5,7 @@ import { useFocusEffect, useNavigation } from "expo-router";
 import { Picker } from "@react-native-picker/picker";
 import locationsData from "../../../../constants/dropOffData";
 import { theme } from "../../../../constants/theme";
+import ScreenWrapper from "../../../../components/ScreenWrapper";
 
 const { height: screenHeight, width: screenWidth } = Dimensions.get("window");
 
@@ -26,7 +27,7 @@ const DropOff = () => {
   });
 
   return (
-    <>
+    <ScreenWrapper bg={theme.colors.whiteGreen}>
       <StatusBar backgroundColor="transparent" barStyle="dark-content" translucent />
 
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
@@ -85,7 +86,7 @@ const DropOff = () => {
           </View>
         )}
       </ScrollView>
-    </>
+    </ScreenWrapper>
   );
 };
 
