@@ -55,7 +55,8 @@ const Profile = () => {
       <View style={styles.profileLinkContainer}>
         <Button
           title={"Edit Profile"}
-          buttonStyle={styles.profileLink}
+          buttonStyle={styles.profileLinkInverse}
+          textStyle={{ color: theme.colors.primary }}
           onPress={() => router.push(routes.EDIT_PROFILE)}
         />
         <Button
@@ -121,12 +122,17 @@ const styles = StyleSheet.create({
     fontSize: hp(2),
   },
   profileLinkContainer: {
-    flexDirection: "row",
     marginTop: 10,
-    gap: 10,
   },
   profileLink: {
-    marginTop: hp(3),
-    width: wp(35),
+    marginTop: hp(2),
+    width: wp(90),
+  },
+  profileLinkInverse: {
+    marginTop: hp(2),
+    width: wp(90),
+    backgroundColor: "white",
+    borderWidth: 1,
+    borderColor: theme.colors.primary,
   },
 });

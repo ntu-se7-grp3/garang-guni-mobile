@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
     zIndex: 999,
     height: hp(6),
     width: hp(6),
-    backgroundColor: "blue",
+    backgroundColor: "#0a5d3c",
     borderRadius: "50%",
   },
   sampleIcon: {

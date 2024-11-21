@@ -1,4 +1,4 @@
-import { Stack } from "expo-router";
+import { router, Stack, useFocusEffect } from "expo-router";
 
 export default function ProfileLayout() {
   return (
