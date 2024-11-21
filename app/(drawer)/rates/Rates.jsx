@@ -1,9 +1,8 @@
 import React from "react";
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { theme } from "../../../constants/theme";
 import ScreenWrapper from "../../../components/ScreenWrapper";
-import { router } from "expo-router";
-import { routes } from "../../../constants/routes";
+import TabHeader from "../../../components/TabHeader";
 
 const ratesData = [
   {
@@ -43,14 +42,9 @@ const ratesData = [
 const RatesPage = () => {
   return (
     <ScreenWrapper bg={theme.colors.whiteGreen}>
-      {/* Top-Left Home Button */}
-      <TouchableOpacity
-        style={styles.homeButton}
-        onPress={() => router.replace(routes.HOME)}
-      >
-        <Text style={styles.homeButtonText}>Go back to Home</Text>
-      </TouchableOpacity>
-
+      {/* Tab Header */}
+      <TabHeader />
+      
       <ScrollView style={styles.container} contentContainerStyle={styles.scrollContent}>
         <Text style={styles.title}>OUR RATES</Text>
 
@@ -93,21 +87,6 @@ const RatesPage = () => {
 export default RatesPage;
 
 const styles = StyleSheet.create({
-  homeButton: {
-    position: "absolute",
-    top: 30,
-    left: 10,
-    backgroundColor: theme.colors.primary,
-    paddingVertical: 8,
-    paddingHorizontal: 15,
-    borderRadius: 5,
-    zIndex: 10,
-  },
-  homeButtonText: {
-    color: "white",
-    fontWeight: "bold",
-    fontSize: 14,
-  },
   container: {
     flex: 1,
     paddingHorizontal: 20,
@@ -118,7 +97,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "bold",
-    marginTop: 40,
+    marginTop: 20, // Adjusted for spacing below header
     marginBottom: 20,
     textAlign: "center",
   },
