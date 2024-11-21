@@ -10,6 +10,15 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { theme } from "../../../constants/theme";
 import TabHeader from "../../../components/TabHeader";
 import DefaultBookingHistoryContainer from "../../../components/DefaultBookingHistoryContainer";
+import {
+  fakeGetAllBookingResponse,
+  fakeGetAllImageFromItemResponse,
+  fakeGetAllItemFromBookingResponse,
+} from "../../../constants/fakeBooking";
+import {
+  generateBookingSummary,
+  getItemIds,
+} from "../../../utils/bookingUtils";
 
 const TransactionHistory = () => {
   const [isLoading, setLoading] = useState(true);
