@@ -3,7 +3,7 @@
     "name": "garang-guni-mobile",
     "slug": "garang-guni-mobile",
     "scheme": "garang-guni-mobile",
-    "version": "0.0.2",
+    "version": "0.1.0",
     "orientation": "portrait",
     "icon": "./assets/icons/logo.png",
     "userInterfaceStyle": "light",
