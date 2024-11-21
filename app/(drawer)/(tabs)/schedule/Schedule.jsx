@@ -1,4 +1,4 @@
-import { Alert, ScrollView, StyleSheet, Text } from "react-native";
+import { Alert, ScrollView, StyleSheet, Text, View } from "react-native";
 import React, { useCallback, useState } from "react";
 import { useRouter, useNavigation, useFocusEffect } from "expo-router";
 import { routes } from "../../../../constants/routes";
@@ -19,11 +19,13 @@ import {
   fakeGetAllItemFromBookingResponse,
 } from "../../../../constants/fakeBooking";
 import Loading from "../../../../components/Loading";
+import Button from "../../../../components/Button";
 
 const Schedule = () => {
   const router = useRouter();
   const navigation = useNavigation();
   const [isLoading, setLoading] = useState(true);
+  const [upcomingBookings, setUpcomingBookings] = useState([]);
   const { user, setUser } = useAuth();
   const usingFakeData = true;
 
@@ -37,6 +39,18 @@ const Schedule = () => {
       }
 
       if (user && user.bookingSummaries && user.bookingSummaries.length > 0) {
+        const today = new Date();
+        const updatedUpcomingBookingList =
+          user.bookingSummaries
+            ?.filter((booking) => {
+              const bookingDate = new Date(parseDate(booking.date));
+              return bookingDate >= today;
+            })
+            .sort(
+              (a, b) =>
+                new Date(parseDate(a.date)) - new Date(parseDate(b.date))
+            ) || [];
+        setUpcomingBookings(updatedUpcomingBookingList);
         setLoading(false);
         return;
       }
@@ -63,7 +77,7 @@ const Schedule = () => {
       }
       user.hasPreloadedOnce = true;
       setLoading(false);
-    }, [])
+    }, [user?.bookingSummaries])
   );
 
   if (!user) {
@@ -87,8 +101,6 @@ const Schedule = () => {
             const updatedSummaries = user.bookingSummaries.filter(
               (summary) => summary.bookingId !== bookingId
             );
-            console.log(updatedSummaries);
-            console.log(bookingId);
             setUser({ ...user, bookingSummaries: updatedSummaries });
           },
         },
@@ -96,76 +108,93 @@ const Schedule = () => {
     );
   };
 
-  const today = new Date();
-  const upcomingBookings =
-    user.bookingSummaries
-      ?.filter((booking) => {
-        const bookingDate = new Date(parseDate(booking.date));
-        return bookingDate >= today;
-      })
-      .sort((a, b) => new Date(a.date) - new Date(b.date)) || [];
+  const handleNavigateToSchedulePickUp = (bookingId = null) => {
+    router.push({
+      pathname: routes.SCHEDULE_PICKUP,
+      params: bookingId ? bookingId : {},
+    });
+  };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.scheduleTitle}>UPCOMING BOOKINGS</Text>
-      {user && upcomingBookings.length === 0 && <DefaultBookingContainer />}
-      {user &&
-        upcomingBookings.map(
-          (
-            { bookingId, address, date, time, itemsToRecycle, remarks, images },
-            idx
-          ) => (
-            <BookingContainer
-              key={idx}
-              icon={
-                <FontAwesome5 name="calendar-alt" size={24} color="black" />
-              }
-              date={date}
-              content={[
-                {
-                  contentHeader: "Address",
-                  contentBody: address,
-                },
-                {
-                  contentHeader: "Pickup Time",
-                  contentBody: time,
-                },
-                {
-                  contentHeader: "Items to Recycle",
-                  contentList: itemsToRecycle,
-                },
-                {
-                  contentHeader: "Remark",
-                  contentBody: remarks,
-                },
-                {
-                  contentHeader: "Uploaded Images",
-                  contentImgs: images,
-                },
-              ]}
-              buttons={[
-                {
-                  buttonStyle: {},
-                  title: "Rechedule Booking",
-                  onPress: () => {},
-                },
-                {
-                  buttonStyle: {
-                    backgroundColor: "white",
-                    borderWidth: 1,
-                    borderColor: theme.colors.primary,
+    <>
+      <ScrollView contentContainerStyle={styles.container}>
+        <Text style={styles.scheduleTitle}>UPCOMING BOOKINGS</Text>
+        {user && upcomingBookings.length === 0 && <DefaultBookingContainer />}
+        {user &&
+          upcomingBookings.map(
+            (
+              {
+                bookingId,
+                address,
+                date,
+                time,
+                itemsToRecycle,
+                remarks,
+                images,
+              },
+              idx
+            ) => (
+              <BookingContainer
+                key={idx}
+                icon={
+                  <FontAwesome5 name="calendar-alt" size={24} color="black" />
+                }
+                date={date}
+                content={[
+                  address && {
+                    contentHeader: "Address",
+                    contentBody: address,
                   },
-                  textStyle: {
-                    color: theme.colors.primary,
+                  time && {
+                    contentHeader: "Pickup Time",
+                    contentBody: time,
                   },
-                  title: "Cancel Booking",
-                  onPress: () => handleDeleteBooking(bookingId),
-                },
-              ]}
-            />
-          )
+                  itemsToRecycle.length !== 0 && {
+                    contentHeader: "Items to Recycle",
+                    contentList: itemsToRecycle,
+                  },
+                  remarks && {
+                    contentHeader: "Remark",
+                    contentBody: remarks,
+                  },
+                  images.length !== 0 && {
+                    contentHeader: "Uploaded Images",
+                    contentImgs: images,
+                  },
+                ].filter(Boolean)}
+                buttons={[
+                  {
+                    buttonStyle: {},
+                    title: "Rechedule Booking",
+                    onPress: () =>
+                      handleNavigateToSchedulePickUp({
+                        bookingId,
+                      }),
+                  },
+                  {
+                    buttonStyle: styles.invertedColorButton,
+                    textStyle: {
+                      color: theme.colors.primary,
+                    },
+                    title: "Cancel Booking",
+                    onPress: () => handleDeleteBooking(bookingId),
+                  },
+                ]}
+              />
+            )
+          )}
+        {upcomingBookings.length !== 0 && (
+          <View style={styles.floatingMarginCreater}></View>
         )}
-    </ScrollView>
+      </ScrollView>
+      {upcomingBookings.length !== 0 && (
+        <Button
+          title={"+"}
+          buttonStyle={styles.floatingButton}
+          onPress={() => handleNavigateToSchedulePickUp(null)}
+        />
+      )}
+    </>
   );
 };
 
@@ -186,5 +215,21 @@ const styles = StyleSheet.create({
     margin: hp(3),
     marginBottom: 0,
     marginLeft: 0,
+  },
+  invertedColorButton: {
+    backgroundColor: "white",
+    borderWidth: 1,
+    borderColor: theme.colors.primary,
+  },
+  floatingButton: {
+    position: "absolute",
+    bottom: 15,
+    right: 10,
+    width: hp(7),
+    height: hp(7),
+    borderRadius: hp(7) / 2,
+  },
+  floatingMarginCreater: {
+    height: hp(8),
   },
 });
