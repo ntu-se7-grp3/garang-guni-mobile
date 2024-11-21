@@ -106,9 +106,11 @@ const SchedulePickUp = () => {
       );
       updatedBookingSummaries.push(updatedBooking);
       setUser({ ...user, bookingSummaries: updatedBookingSummaries });
+      Alert.alert("Successful", "You have successfully updated your booking!");
     } else {
       allBookingSummaries.push(updatedBooking);
       setUser({ ...user, bookingSummaries: allBookingSummaries });
+      Alert.alert("Successful", "You have successfully created your booking!");
     }
     router.replace(routes.BOOKINGS);
   };

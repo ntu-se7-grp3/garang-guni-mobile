@@ -56,6 +56,7 @@ const ChangePassword = () => {
     }
 
     //setUser({...user, password: password});
+    Alert.alert("Successful", "You have successfully updated your password!");
     router.back();
   };
 

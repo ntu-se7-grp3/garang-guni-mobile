@@ -23,6 +23,10 @@ const ForgotPassword = () => {
   const handleSendEmail = () => {
     setLoading(true);
     // Send Email Notification here.
+    Alert.alert(
+      "Password Recovery",
+      "If this email is registered with us, we've sent a link with instructions to recover your password. Please check your inbox and spam folder."
+    );
     setLoading(false);
     router.back();
   };

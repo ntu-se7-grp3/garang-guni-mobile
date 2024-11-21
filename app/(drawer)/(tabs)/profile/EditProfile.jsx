@@ -55,6 +55,7 @@ const EditProfile = () => {
       ...formData,
       profileImg: selectedDisplayPic,
     });
+    Alert.alert("Successful", "You have successfully updated your profile!");
     router.back();
   };
 
