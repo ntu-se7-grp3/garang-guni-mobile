@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from "react";
+import React from "react";
 import { ScrollView, View, Text, StyleSheet, Image, Dimensions, StatusBar } from "react-native";
 import { useFocusEffect, router } from "expo-router";
 import { routes } from "../../../../constants/routes";
@@ -17,32 +17,17 @@ import bulletImage from "../../../../assets/home/bullet.png";
 const { height: screenHeight } = Dimensions.get("window");
 
 const Home = () => {
-  const sectionsRef = useRef([]);
-
   useFocusEffect(
-    useCallback(() => {
+    React.useCallback(() => {
       router.replace(routes.HOME);
     }, [])
   );
-
-  const scrollToSection = (index) => {
-    sectionsRef.current[index]?.scrollTo({
-      y: index * screenHeight,
-      animated: true,
-    });
-  };
 
   return (
     <ScreenWrapper bg={theme.colors.whiteGreen}>
       <StatusBar backgroundColor="transparent" barStyle="dark-content" translucent />
 
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}
-        pagingEnabled
-        snapToInterval={screenHeight}
-        ref={(el) => (sectionsRef.current = el)}
-      >
+      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
         {/* Homepage Section */}
         <View style={styles.section}>
           <Text style={styles.headerTitle}>SELL YOUR JUNK,</Text>
@@ -129,11 +114,10 @@ const styles = StyleSheet.create({
     paddingTop: StatusBar.currentHeight || 0,
   },
   section: {
-    height: screenHeight,
+    paddingVertical: 20,
     justifyContent: "flex-start",
     alignItems: "center",
     paddingHorizontal: 20,
-    paddingTop: 20,
   },
   headerTitle: {
     fontSize: 36,
