@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "garang-guni-backend",
-    "slug": "garang-guni-backend",
-    "scheme": "garang-guni-backend",
+    "name": "garang-guni-mobile",
+    "slug": "garang-guni-mobile",
+    "scheme": "garang-guni-mobile",
     "version": "0.0.2",
     "orientation": "portrait",
     "icon": "./assets/icons/logo.png",
@@ -27,7 +27,28 @@
     },
     "plugins": [
       "expo-router",
-      "expo-font"
+      "expo-font",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera.",
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone"
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Allow $(PRODUCT_NAME) to access your photos.",
+          "savePhotosPermission": "Allow $(PRODUCT_NAME) to save photos.",
+          "isAccessMediaLocationEnabled": true
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow $(PRODUCT_NAME) to access your photos."
+        }
+      ]
     ]
   }
 }
