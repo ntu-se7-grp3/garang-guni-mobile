@@ -192,10 +192,10 @@ const styles = StyleSheet.create({
     paddingVertical: hp(2),
   },
   welcomeText: {
-    height: hp(5),
+    height: hp(5.2),
     fontWeight: theme.fonts.fontWeight.bold,
     color: theme.colors.text,
-    fontSize: theme.fonts.fontSize["3xl"],
+    fontSize: hp(3.8),
   },
   form: {
     gap: 10,
