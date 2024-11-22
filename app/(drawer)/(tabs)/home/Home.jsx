@@ -34,7 +34,8 @@ const Home = () => {
   return (
     <ScreenWrapper bg={theme.colors.whiteGreen}>
       <StatusBar
-        backgroundColor="transparent"
+        StatusBar
+        backgroundColor={theme.colors.primary}
         barStyle="dark-content"
         translucent
       />
