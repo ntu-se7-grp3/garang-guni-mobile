@@ -20,7 +20,7 @@ const TabHeader = () => {
     <View style={styles.headerContainer}>
       <View style={styles.leftHeaderContent}>
         <PressableOpacity style={styles.hamburgerIcon} onPress={toggleDrawer}>
-          <FontAwesome5 name="bars" size={24} color="black" />
+          <FontAwesome5 name="bars" size={24} color="#0a5d3c" />
         </PressableOpacity>
         <Text style={styles.text}>Garang Guni</Text>
       </View>

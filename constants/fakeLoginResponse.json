@@ -12,7 +12,7 @@
     },
     "content_type": "application/json",
     "body": {
-      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0QHRlc3QuY29tIiwiaWQiOiI5ZmJjZTRkNi04NzQxLTQzNzctOTZmYy1iZjM0YzdiMjFlODEiLCJmaXJzdE5hbWUiOiJ0ZXN0Rmlyc3QiLCJsYXN0TmFtZSI6InRlc3RsYXN0IiwiaWF0IjoxNzMxNzkyODk3LCJleHAiOjE3MzUzOTI4OTd9.m4s0yZtCHN6dBR1DDTQtUM6FPj7W1a9wso46AinDMyM"
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNvbkxpbUBHbWFpbC5jb20iLCJpZCI6IjQxYTA2ODY2LTA0YzgtNDRkYi1iZjE4LTg0NDYwNjRjMjg2YSIsImZpcnN0TmFtZSI6Ikphc29uIiwibGFzdE5hbWUiOiJMaW0iLCJpYXQiOjE3MzIwMzA2MDMsImV4cCI6MTczNTYzMDYwM30.8OO8XCQSveRDosdThp_-864tHcfAC4rlbhs_lGWaVy0"
     },
     "forwarded_url": null,
     "redirected_url": null,
