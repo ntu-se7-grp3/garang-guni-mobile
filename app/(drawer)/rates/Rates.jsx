@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { theme } from "../../../constants/theme";
 import ScreenWrapper from "../../../components/ScreenWrapper";
 import TabHeader from "../../../components/TabHeader";
+import { hp } from "../../../common";
 
 const ratesData = [
   {
@@ -32,9 +33,19 @@ const ratesData = [
     items: [
       { name: "Television", pickup: "$5.00", dropOff: "$7.00", unit: "/Unit" },
       { name: "Radio", pickup: "$2.00", dropOff: "$3.00", unit: "/Unit" },
-      { name: "Mobile Phone", pickup: "$1.00", dropOff: "$1.50", unit: "/Unit" },
+      {
+        name: "Mobile Phone",
+        pickup: "$1.00",
+        dropOff: "$1.50",
+        unit: "/Unit",
+      },
       { name: "Laptop", pickup: "$3.00", dropOff: "$5.00", unit: "/Unit" },
-      { name: "Power Supply", pickup: "$0.50", dropOff: "$0.80", unit: "/Unit" },
+      {
+        name: "Power Supply",
+        pickup: "$0.50",
+        dropOff: "$0.80",
+        unit: "/Unit",
+      },
     ],
   },
 ];
@@ -44,8 +55,11 @@ const RatesPage = () => {
     <ScreenWrapper bg={theme.colors.whiteGreen}>
       {/* Tab Header */}
       <TabHeader />
-      
-      <ScrollView style={styles.container} contentContainerStyle={styles.scrollContent}>
+
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.scrollContent}
+      >
         <Text style={styles.title}>OUR RATES</Text>
 
         {ratesData.map((category, index) => (
@@ -95,9 +109,9 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
   },
   title: {
-    fontSize: 24,
+    fontSize: hp(3),
     fontWeight: "bold",
-    marginTop: 20, // Adjusted for spacing below header
+    marginTop: 20,
     marginBottom: 20,
     textAlign: "center",
   },
@@ -105,7 +119,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   categoryTitle: {
-    fontSize: 18,
+    fontSize: hp(2.25),
     fontWeight: "bold",
     marginBottom: 10,
   },
@@ -121,7 +135,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   headerRow: {
-    backgroundColor: "#d9f2d9",
+    backgroundColor: theme.colors.primary,
   },
   evenRow: {
     backgroundColor: "#f9f9f9",
@@ -136,5 +150,6 @@ const styles = StyleSheet.create({
   },
   headerCell: {
     fontWeight: "bold",
+    color: "white",
   },
 });
