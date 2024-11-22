@@ -4,10 +4,23 @@ import { Picker } from "@react-native-picker/picker";
 import { theme } from "../../../constants/theme";
 import ScreenWrapper from "../../../components/ScreenWrapper";
 import TabHeader from "../../../components/TabHeader";
+import enTranslations from "../../../translations/en/Settings.json";
+import zhTranslations from "../../../translations/zh/Settings.json";
+import msTranslations from "../../../translations/ms/Settings.json";
+import taTranslations from "../../../translations/ta/Settings.json";
 
 const Settings = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState("English");
+  const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const translations = {
+    en: enTranslations,
+    zh: zhTranslations,
+    ms: msTranslations,
+    ta: taTranslations,
+  };
+
+  const text = translations[selectedLanguage];
 
   const handleLanguageChange = (language) => {
     setSelectedLanguage(language);
@@ -23,13 +36,13 @@ const Settings = () => {
       <TabHeader />
       <View style={[styles.container, isDarkMode && styles.darkContainer]}>
         <Text style={[styles.title, isDarkMode && styles.darkText]}>
-          Settings
+          {text.settingsTitle}
         </Text>
 
         {/* Language Setting */}
         <View style={styles.settingContainer}>
           <Text style={[styles.settingLabel, isDarkMode && styles.darkText]}>
-            Change Language
+            {text.changeLanguage}
           </Text>
           <View style={styles.pickerWrapper}>
             <Picker
@@ -40,10 +53,10 @@ const Settings = () => {
               mode="dropdown"
             >
               <Picker.Item label="Choose here" value="" enabled={false} />
-              <Picker.Item label="English" value="English" />
-              <Picker.Item label="中文" value="Chinese" />
-              <Picker.Item label="Bahasa Melayu" value="Malay" />
-              <Picker.Item label="தமிழ்" value="Tamil" />
+              <Picker.Item label="English" value="en" />
+              <Picker.Item label="中文" value="zh" />
+              <Picker.Item label="Bahasa Melayu" value="ms" />
+              <Picker.Item label="தமிழ்" value="ta" />
             </Picker>
           </View>
         </View>
@@ -51,7 +64,7 @@ const Settings = () => {
         {/* Theme Setting */}
         <View style={styles.settingContainer}>
           <Text style={[styles.settingLabel, isDarkMode && styles.darkText]}>
-            Theme
+            {text.theme}
           </Text>
           <View style={styles.switchWrapper}>
             <Switch
@@ -61,7 +74,7 @@ const Settings = () => {
               trackColor={{ false: "#767577", true: theme.colors.primary }}
             />
             <Text style={[styles.switchLabel, isDarkMode && styles.darkText]}>
-              {isDarkMode ? "Dark Mode" : "Light Mode"}
+              {isDarkMode ? text.darkMode : text.lightMode}
             </Text>
           </View>
         </View>

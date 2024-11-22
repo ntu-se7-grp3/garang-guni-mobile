@@ -191,7 +191,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderWidth: 1,
     borderColor: theme.colors.primary,
-    borderRadius: 5,
     padding: 12,
     width: "90%",
     alignSelf: "center",
@@ -208,7 +207,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderWidth: 1,
     borderColor: theme.colors.primary,
-    borderRadius: 5,
     paddingVertical: 12,
     marginHorizontal: 5,
   },
@@ -221,7 +219,6 @@ const styles = StyleSheet.create({
   filledButton: {
     flex: 1,
     backgroundColor: theme.colors.primary,
-    borderRadius: 5,
     paddingVertical: 12,
     marginHorizontal: 5,
   },

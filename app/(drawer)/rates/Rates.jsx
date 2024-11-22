@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
   table: {
     borderWidth: 1,
     borderColor: "#ccc",
-    borderRadius: 5,
+    borderRadius: theme.radius.xxxs,
     overflow: "hidden",
   },
   row: {
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
   },
   cell: {
     flex: 1,
-    fontSize: 14,
+    fontSize: hp(1.75),
     textAlign: "center",
   },
   headerCell: {

@@ -132,7 +132,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   smallText: {
-    paddingLeft: 3,
     fontSize: hp(1.5),
     color: theme.colors.text,
   },
