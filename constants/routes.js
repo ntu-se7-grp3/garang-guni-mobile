@@ -13,4 +13,8 @@ export const routes = {
   LOGIN: "/(auth)/Login",
   LOGIN_SIGN_UP_WELCOME: "/(auth)/Welcome",
   FORGOT_PASSWORD: "/(auth)/ForgotPassword",
+  SCHEDULE_PICKUP: "/(drawer)/(tabs)/schedule/SchedulePickUp",
+  CAMERA: "/camera/Camera",
+  EDIT_PROFILE: "/(drawer)/(tabs)/profile/EditProfile",
+  CHANGE_PASSWORD: "/(auth)/ChangePassword",
 };
