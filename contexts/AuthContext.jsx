@@ -21,6 +21,8 @@ export const AuthProvider = ({ children }) => {
     user,
     saveToken,
     clearToken,
+    setUser,
+    setToken,
   };
 
   return (

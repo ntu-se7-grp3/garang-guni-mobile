@@ -1,11 +1,19 @@
-// npm install @react-native-picker/picker
-import { StyleSheet, Text, ScrollView, View, Image, Dimensions, StatusBar } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  ScrollView,
+  View,
+  Image,
+  Dimensions,
+  StatusBar,
+} from "react-native";
 import React, { useCallback, useState } from "react";
 import { useFocusEffect, useNavigation } from "expo-router";
 import { Picker } from "@react-native-picker/picker";
 import locationsData from "../../../../constants/dropOffData";
 import { theme } from "../../../../constants/theme";
 import ScreenWrapper from "../../../../components/ScreenWrapper";
+import { hp } from "../../../../common";
 
 const { height: screenHeight, width: screenWidth } = Dimensions.get("window");
 
@@ -21,16 +29,25 @@ const DropOff = () => {
   );
 
   const filteredLocations = locationsData.filter((location) => {
-    const matchesRegion = selectedRegion === "All Location" || location.region === selectedRegion;
-    const matchesDay = selectedDay === "Any Day" || location.days.includes(selectedDay);
+    const matchesRegion =
+      selectedRegion === "All Location" || location.region === selectedRegion;
+    const matchesDay =
+      selectedDay === "Any Day" || location.days.includes(selectedDay);
     return matchesRegion && matchesDay;
   });
 
   return (
     <ScreenWrapper bg={theme.colors.whiteGreen}>
-      <StatusBar backgroundColor="transparent" barStyle="dark-content" translucent />
+      <StatusBar
+        backgroundColor={theme.colors.primary}
+        barStyle="dark-content"
+        translucent
+      />
 
-      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.contentContainer}
+      >
         <Text style={styles.pageTitle}>DROP OFF POINTS</Text>
 
         {/* Filters */}
@@ -40,12 +57,28 @@ const DropOff = () => {
             onValueChange={(value) => setSelectedRegion(value)}
             style={styles.picker}
           >
-            <Picker.Item label="All Location" value="All Location" />
-            <Picker.Item label="West" value="West" />
-            <Picker.Item label="North East" value="North East" />
-            <Picker.Item label="North West" value="North West" />
-            <Picker.Item label="East" value="East" />
-            <Picker.Item label="Central" value="Central" />
+            <Picker.Item
+              label="All Location"
+              value="All Location"
+              style={styles.pickerItem}
+            />
+            <Picker.Item label="West" value="West" style={styles.pickerItem} />
+            <Picker.Item
+              label="North East"
+              value="North East"
+              style={styles.pickerItem}
+            />
+            <Picker.Item
+              label="North West"
+              value="North West"
+              style={styles.pickerItem}
+            />
+            <Picker.Item label="East" value="East" style={styles.pickerItem} />
+            <Picker.Item
+              label="Central"
+              value="Central"
+              style={styles.pickerItem}
+            />
           </Picker>
 
           <Picker
@@ -53,14 +86,18 @@ const DropOff = () => {
             onValueChange={(value) => setSelectedDay(value)}
             style={styles.picker}
           >
-            <Picker.Item label="Any Day" value="Any Day" />
-            <Picker.Item label="Mon" value="Mon" />
-            <Picker.Item label="Tue" value="Tue" />
-            <Picker.Item label="Wed" value="Wed" />
-            <Picker.Item label="Thu" value="Thu" />
-            <Picker.Item label="Fri" value="Fri" />
-            <Picker.Item label="Sat" value="Sat" />
-            <Picker.Item label="Sun" value="Sun" />
+            <Picker.Item
+              label="Any Day"
+              value="Any Day"
+              style={styles.pickerItem}
+            />
+            <Picker.Item label="Mon" value="Mon" style={styles.pickerItem} />
+            <Picker.Item label="Tue" value="Tue" style={styles.pickerItem} />
+            <Picker.Item label="Wed" value="Wed" style={styles.pickerItem} />
+            <Picker.Item label="Thu" value="Thu" style={styles.pickerItem} />
+            <Picker.Item label="Fri" value="Fri" style={styles.pickerItem} />
+            <Picker.Item label="Sat" value="Sat" style={styles.pickerItem} />
+            <Picker.Item label="Sun" value="Sun" style={styles.pickerItem} />
           </Picker>
         </View>
 
@@ -75,14 +112,20 @@ const DropOff = () => {
 
               <Text style={styles.locationName}>{location.name}</Text>
               <Image source={location.map} style={styles.mapImage} />
-              <Text style={styles.addressText}>Address: {location.address}</Text>
-              <Text style={styles.detailsText}>Day: {location.days.join(", ")}</Text>
+              <Text style={styles.addressText}>
+                Address: {location.address}
+              </Text>
+              <Text style={styles.detailsText}>
+                Day: {location.days.join(", ")}
+              </Text>
               <Text style={styles.detailsText}>Time: {location.time}</Text>
             </View>
           ))
         ) : (
           <View style={styles.noLocationsContainer}>
-            <Text style={styles.noLocationsText}>Hang on, we are coming soon!</Text>
+            <Text style={styles.noLocationsText}>
+              Hang on, we are coming soon!
+            </Text>
           </View>
         )}
       </ScrollView>
@@ -100,8 +143,11 @@ const styles = StyleSheet.create({
   contentContainer: {
     paddingBottom: 20,
   },
+  pickerItem: {
+    fontSize: hp(1.65),
+  },
   pageTitle: {
-    fontSize: 24,
+    fontSize: hp(3),
     fontWeight: "bold",
     textAlign: "center",
     marginVertical: 15,
