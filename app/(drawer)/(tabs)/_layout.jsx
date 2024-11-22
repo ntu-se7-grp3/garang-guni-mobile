@@ -11,8 +11,8 @@ const TabLayout = () => {
       <TabHeader />
       <Tabs
         screenOptions={{
-          tabBarActiveTintColor: "red",
-          tabBarInactiveTintColor: "gray",
+          tabBarActiveTintColor: theme.colors.primary,
+          tabBarInactiveTintColor: "rgba(0,0,0,0.4)",
           tabBarStyle: {
             backgroundColor: theme.colors.tabLightColor,
           },
@@ -40,7 +40,7 @@ const TabLayout = () => {
           }}
         />
         <Tabs.Screen
-          name="schedule/Schedule"
+          name="schedule"
           options={{
             title: "Schedule",
             headerShown: false,
@@ -60,7 +60,7 @@ const TabLayout = () => {
           }}
         />
         <Tabs.Screen
-          name="profile/Profile"
+          name="profile"
           options={{
             title: "Profile",
             headerShown: false,
