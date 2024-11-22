@@ -15,7 +15,7 @@ const Welcome = () => {
   const ROUTES = routes;
   return (
     <ScreenWrapper bg={theme.colors.whiteGreen}>
-      <StatusBar style="dark" />
+      <StatusBar backgroundColor={theme.colors.primary} />
       <View style={styles.container}>
         <HomeButton router={router} />
 

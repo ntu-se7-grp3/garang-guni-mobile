@@ -20,7 +20,7 @@ const Onboarding = () => {
 
   return (
     <ScreenWrapper bg={theme.colors.whiteGreen}>
-      <StatusBar style="dark" />
+      <StatusBar backgroundColor={theme.colors.primary} />
       <View style={styles.container}>
         {/* First time page Image */}
         <Image

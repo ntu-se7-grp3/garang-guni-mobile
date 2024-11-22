@@ -62,7 +62,7 @@ const ChangePassword = () => {
 
   return (
     <ScreenWrapper bg="white">
-      <StatusBar style="dark" />
+      <StatusBar backgroundColor={theme.colors.primary} />
       <View style={styles.container}>
         <BackButton router={router} />
 
