@@ -171,6 +171,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.whiteGreen,
     padding: 20,
     alignItems: "center",
+    flexGrow: 1,
   },
   title: {
     fontSize: hp(3),

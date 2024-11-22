@@ -14,46 +14,64 @@ import fakeGetUserResponse from "../../constants/fakeGetUserResponse.json";
 import { decodeJwt } from "../../utils/jwtUtils";
 import { useAuth } from "../../contexts/AuthContext";
 import { routes } from "../../constants/routes";
+import * as yup from "yup";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+// Validation schema using Yup
+const schema = yup.object().shape({
+  username: yup.string().required("Username is required"),
+  email: yup
+    .string()
+    .required("Email is required")
+    .email("Invalid email format"),
+  phoneNo: yup
+    .string()
+    .required("Contact number is required")
+    .matches(
+      /^[689]\d{7}$/,
+      "Contact number must be 8 digits and start with 6, 8, or 9"
+    ),
+  password: yup
+    .string()
+    .required("Password is required")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&*!])[A-Za-z\d@#$%^&*!]{8,}$/,
+      "Password must be at least 8 characters long with a combination of uppercase letters, lowercase letters, numbers, and symbols"
+    ),
+  cfmPassword: yup
+    .string()
+    .required("Confirm password is required")
+    .oneOf([yup.ref("password"), null], "Passwords must match"),
+});
 
 const SignUp = () => {
   const router = useRouter();
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    phoneNo: "",
-    password: "",
-    cfmPassword: "",
-  });
-
-  const [formErrors, setFormErrors] = useState({
-    username: "",
-    email: "",
-    phoneNo: "",
-    password: "",
-    cfmPassword: "",
-  });
-
   const [loading, setLoading] = useState(false);
   const { saveToken, clearToken } = useAuth();
 
-  const handleChange = (field, value) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      [field]: value,
-    }));
-  };
+  // Initialize React Hook Form
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+    mode: "onChange", // Validates on every change
+    defaultValues: {
+      username: "",
+      email: "",
+      phoneNo: "",
+      password: "",
+      cfmPassword: "",
+    },
+  });
 
-  const handleSignUp = async () => {
-    const errorMsgArr = [];
-    for (const [key, value] of Object.entries(formData)) {
-      if (value === "") {
-        errorMsgArr.push(`${key}`);
-      }
-    }
+  const handleSignUp = async (formData) => {
+    const { username, email, phoneNo, password, cfmPassword } = formData;
 
-    if (errorMsgArr) {
-      const allErrors = errorMsgArr.join(",");
-      Alert.alert(`The field "${allErrors}" cannot be empty.`);
+    if (!username || !email || !phoneNo || !password || !cfmPassword) {
+      Alert.alert("Sign Up", "Please fill all the fields!");
       return;
     }
 
@@ -68,11 +86,13 @@ const SignUp = () => {
       const decodedJwt = decodeJwt(jwtToken);
       const userId = decodedJwt.payload.id;
       let userData = "";
+
       // In actuality, this is used to call backend again.
       if (userId) {
         const userDataResponse = fakeGetUserResponse;
         userData = userDataResponse.body;
       }
+
       clearToken();
       saveToken(jwtToken, userData);
       router.replace(routes.STARTING_PAGE);
@@ -120,41 +140,120 @@ const SignUp = () => {
             Please fill in details to create an account
           </Text>
 
-          <Input
-            icon={<Feather name="user" size={24} color="black" />}
-            placeholder="Enter your username"
-            onChangeText={(username) => handleChange("username", username)}
+          <Controller
+            control={control}
+            name="username"
+            rules={{ required: true }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <>
+                <Input
+                  icon={<Feather name="user" size={24} color="black" />}
+                  placeholder="Enter your username"
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                />
+                {errors.username && (
+                  <Text style={styles.errorText}>
+                    {errors.username.message}
+                  </Text>
+                )}
+              </>
+            )}
           />
 
-          <Input
-            icon={<Feather name="mail" size={24} color="black" />}
-            placeholder="Enter your email"
-            onChangeText={(email) => handleChange("email", email)}
+          <Controller
+            control={control}
+            name="email"
+            rules={{ required: true }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <>
+                <Input
+                  icon={<Feather name="mail" size={24} color="black" />}
+                  placeholder="Enter your email"
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                />
+                {errors.email && (
+                  <Text style={styles.errorText}>{errors.email.message}</Text>
+                )}
+              </>
+            )}
           />
 
-          <Input
-            icon={<Feather name="smartphone" size={24} color="black" />}
-            placeholder="Enter your phone"
-            onChangeText={(phoneNo) => handleChange("phoneNo", phoneNo)}
+          <Controller
+            control={control}
+            name="phoneNo"
+            rules={{ required: true }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <>
+                <Input
+                  icon={<Feather name="smartphone" size={24} color="black" />}
+                  placeholder="Enter your phone"
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                />
+                {errors.phoneNo && (
+                  <Text style={styles.errorText}>{errors.phoneNo.message}</Text>
+                )}
+              </>
+            )}
           />
 
-          <Input
-            icon={<Feather name="lock" size={24} color="black" />}
-            placeholder="Enter your password"
-            isPasswordField={true}
-            onChangeText={(password) => handleChange("password", password)}
+          <Controller
+            control={control}
+            name="password"
+            rules={{ required: true }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <>
+                <Input
+                  icon={<Feather name="lock" size={24} color="black" />}
+                  placeholder="Enter your password"
+                  isPasswordField={true}
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                />
+                {errors.password && (
+                  <Text style={styles.errorText}>
+                    {errors.password.message}
+                  </Text>
+                )}
+              </>
+            )}
           />
 
-          <Input
-            icon={<Feather name="lock" size={24} color="black" />}
-            placeholder="Enter your password again"
-            isPasswordField={true}
-            onChangeText={(cfmPassword) =>
-              handleChange("cfmPassword", cfmPassword)
-            }
+          <Controller
+            control={control}
+            name="cfmPassword"
+            rules={{ required: true }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <>
+                <Input
+                  icon={<Feather name="lock" size={24} color="black" />}
+                  placeholder="Enter your password again"
+                  isPasswordField={true}
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                />
+                {errors.cfmPassword && (
+                  <Text style={styles.errorText}>
+                    {errors.cfmPassword.message}
+                  </Text>
+                )}
+              </>
+            )}
           />
-
-          <Button title={"Sign Up"} loading={loading} onPress={handleSignUp} />
+          <View style={styles.buttonContainer}>
+            <Button
+              title={"Sign Up"}
+              loading={loading}
+              onPress={handleSubmit(handleSignUp)}
+            />
+          </View>
         </View>
 
         <View style={styles.footer}>
@@ -187,7 +286,7 @@ export default SignUp;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    gap: 30,
+    gap: 20,
     paddingHorizontal: wp(5),
     paddingVertical: hp(2),
   },
@@ -196,6 +295,7 @@ const styles = StyleSheet.create({
     fontWeight: theme.fonts.fontWeight.bold,
     color: theme.colors.text,
     fontSize: hp(3.8),
+    marginBottom: 10,
   },
   form: {
     gap: 10,
@@ -204,6 +304,9 @@ const styles = StyleSheet.create({
     textAlign: "right",
     fontWeight: theme.fonts.fontWeight.semibold,
     color: theme.colors.text,
+  },
+  buttonContainer: {
+    paddingTop: 15,
   },
   footer: {
     flexDirection: "row",
@@ -215,5 +318,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: theme.colors.text,
     fontSize: hp(1.6),
+  },
+  errorText: {
+    color: theme.colors.rose,
+    fontSize: hp(1.5),
   },
 });
