@@ -75,6 +75,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: theme.fonts.fontWeight.bold,
   },
+  catchPhrase: {
+    textAlign: "center",
+  },
   titleEnd: {
     color: theme.colors.text,
     paddingBottom: 20,
