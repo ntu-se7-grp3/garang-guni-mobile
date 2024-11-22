@@ -66,3 +66,40 @@ export const hp = (percentage) => {
 export const wp = (percentage) => {
   return (percentage * deviceWidth) / 100;
 };
+
+export const parseDate = (dateString) => {
+  const monthMap = {
+    Jan: 1,
+    Feb: 2,
+    Mar: 3,
+    Apr: 4,
+    May: 5,
+    Jun: 6,
+    Jul: 7,
+    Aug: 8,
+    Sep: 9,
+    Sept: 9,
+    Oct: 10,
+    Nov: 11,
+    Dec: 12,
+  };
+  const [day, month, year] = dateString.split(" ");
+  return new Date(parseInt(year), monthMap[month], parseInt(day));
+};
+
+export const convertDate = (dateTimeStr) => {
+  const dateTime = new Date(dateTimeStr);
+  const formattedDate = `${dateTime.toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  })} (${dateTime.toLocaleDateString("en-GB", {
+    weekday: "long",
+  })})`;
+
+  if (formattedDate.includes("Invalid Date")) {
+    return "";
+  }
+
+  return formattedDate;
+};

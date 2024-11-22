@@ -7,6 +7,9 @@ export const theme = {
     primary: "#00C26F",
     primaryDark: "#00AC62",
     primaryLightTransparent: "#00C26F4D",
+    primary70Opacity: "#00C26FB3",
+    primary50Opacity: "#00C26F80",
+    primary20Opacity: "#00C26F33",
     dark: "#121212",
     darklight: "#1E1E1E",
     gray: "#424242",
@@ -22,6 +25,7 @@ export const theme = {
     whiteGreen: "#E6FFE6",
 
     tabLightColor: "#FFFFFF",
+    white: "#FFFFFF",
   },
   fonts: {
     fontSize: {
@@ -47,6 +51,7 @@ export const theme = {
     },
   },
   radius: {
+    xxs: 8,
     xs: 10,
     sm: 12,
     md: 14,

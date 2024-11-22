@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import React, { useCallback } from "react";
 import { router, useFocusEffect, useNavigation } from "expo-router";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
@@ -6,15 +6,19 @@ import { useAuth } from "../../../../contexts/AuthContext";
 import { theme } from "../../../../constants/theme";
 import { hp, wp } from "../../../../common";
 import { routes } from "../../../../constants/routes";
-import PressableOpacity from "../../../../components/PressableOpacity";
 import Button from "../../../../components/Button";
 
 const Profile = () => {
   const navigation = useNavigation();
   const { user, clearToken } = useAuth();
   const userImage =
-    user && user.profile ? (
-      <Image source={{ uri: user.profile }} style={styles.profileImg} />
+    user && user.profileImg ? (
+      <Image
+        source={{
+          uri: `data:image/${user.profileImg.type};base64,${user.profileImg.img}`,
+        }}
+        style={styles.profileImg}
+      />
     ) : (
       <View style={styles.sampleIcon}>
         <FontAwesome5 name="user" size={hp(15)} color="black" />
@@ -43,18 +47,18 @@ const Profile = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.profileHeader}>Profile</Text>
-      <PressableOpacity>
-        {userImage}
-        <View style={styles.imgIcon}>
-          <FontAwesome5 name="pencil-alt" size={20} color="white" />
-        </View>
-      </PressableOpacity>
+      {userImage}
       <Text style={styles.profileText}>
         {user.lastName + " " + user.firstName}
       </Text>
-      <Text style={styles.profileEmail}>{user.sub}</Text>
+      <Text style={styles.profileEmail}>{user.email}</Text>
       <View style={styles.profileLinkContainer}>
-        <Button title={"Edit Profile"} buttonStyle={styles.profileLink} />
+        <Button
+          title={"Edit Profile"}
+          buttonStyle={styles.profileLinkInverse}
+          textStyle={{ color: theme.colors.primary }}
+          onPress={() => router.push(routes.EDIT_PROFILE)}
+        />
         <Button
           title={"Log Out"}
           buttonStyle={styles.profileLink}
@@ -118,12 +122,17 @@ const styles = StyleSheet.create({
     fontSize: hp(2),
   },
   profileLinkContainer: {
-    flexDirection: "row",
     marginTop: 10,
-    gap: 10,
   },
   profileLink: {
-    marginTop: hp(3),
-    width: wp(35),
+    marginTop: hp(2),
+    width: wp(90),
+  },
+  profileLinkInverse: {
+    marginTop: hp(2),
+    width: wp(90),
+    backgroundColor: "white",
+    borderWidth: 1,
+    borderColor: theme.colors.primary,
   },
 });

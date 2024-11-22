@@ -30,7 +30,7 @@ const Onboarding = () => {
         />
 
         {/* First time page */}
-        <View>
+        <View style={styles.welcomeTextContainer}>
           <Text style={styles.title}>Discover Endless</Text>
           <Text style={styles.titleEnd}>Possibility with Garang Guni</Text>
           <Text style={styles.catchPhrase}>
@@ -66,11 +66,17 @@ const styles = StyleSheet.create({
     width: wp(100),
     alignSelf: "center",
   },
+  welcomeTextContainer: {
+    alignItems: "center",
+  },
   title: {
     color: theme.colors.text,
     fontSize: theme.fonts.fontSize["2xl"],
     textAlign: "center",
     fontWeight: theme.fonts.fontWeight.bold,
+  },
+  catchPhrase: {
+    textAlign: "center",
   },
   titleEnd: {
     color: theme.colors.text,
