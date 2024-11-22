@@ -1,9 +1,17 @@
 import React, { useState, useCallback } from "react";
-import { StyleSheet, Text, View, Alert, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Alert,
+  Dimensions,
+  ScrollView,
+} from "react-native";
 import { useFocusEffect, useNavigation } from "expo-router";
 import Input from "../../../../components/Input";
 import Button from "../../../../components/Button";
 import { theme } from "../../../../constants/theme";
+import { hp } from "../../../../common";
 
 const { width: screenWidth } = Dimensions.get("window");
 
@@ -31,7 +39,8 @@ const ContactUs = () => {
       newErrors.email = "Email address is required.";
     } else {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) newErrors.email = "Enter a valid email address.";
+      if (!emailRegex.test(email))
+        newErrors.email = "Enter a valid email address.";
     }
     if (!subject.trim()) newErrors.subject = "Subject is required.";
     if (!message.trim()) {
@@ -41,7 +50,7 @@ const ContactUs = () => {
     }
 
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0; // Return true if no errors
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSendMessage = () => {
@@ -62,13 +71,17 @@ const ContactUs = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.title}>CONTACT US</Text>
       <Text style={styles.subtitle}>
         Call or Whatsapp us at <Text style={styles.highlight}>8888 8888</Text>
       </Text>
-      <Text style={{ fontFamily: "System", fontSize: 16 }}>Mon-Fri (9am-6pm)</Text>
-      <Text style={{ fontFamily: "System", fontSize: 16 }}>Saturday (9am-12pm)</Text>
+      <Text style={{ fontFamily: "System", fontSize: 16 }}>
+        Mon-Fri (9am-6pm)
+      </Text>
+      <Text style={{ fontFamily: "System", fontSize: 16 }}>
+        Saturday (9am-12pm)
+      </Text>
 
       <Text style={styles.sectionTitle}>OR DROP US AN EMAIL</Text>
 
@@ -112,7 +125,9 @@ const ContactUs = () => {
             errors.subject ? styles.errorInput : null,
           ]}
         />
-        {errors.subject && <Text style={styles.errorText}>{errors.subject}</Text>}
+        {errors.subject && (
+          <Text style={styles.errorText}>{errors.subject}</Text>
+        )}
       </View>
 
       {/* Message Input */}
@@ -129,7 +144,9 @@ const ContactUs = () => {
             errors.message ? styles.errorInput : null,
           ]}
         />
-        {errors.message && <Text style={styles.errorText}>{errors.message}</Text>}
+        {errors.message && (
+          <Text style={styles.errorText}>{errors.message}</Text>
+        )}
       </View>
       <View style={styles.requiredNoteContainer}>
         <Text style={styles.requiredNote}>* indicates required field</Text>
@@ -143,7 +160,7 @@ const ContactUs = () => {
         loading={false}
         hasShadow={true}
       />
-    </View>
+    </ScrollView>
   );
 };
 
@@ -151,19 +168,18 @@ export default ContactUs;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: theme.colors.whiteGreen,
     padding: 20,
     alignItems: "center",
   },
   title: {
-    fontSize: 24,
+    fontSize: hp(3),
     fontWeight: "bold",
     marginTop: 20,
     marginBottom: 10,
   },
   subtitle: {
-    fontSize: 16,
+    fontSize: hp(2),
     color: "#333",
     textAlign: "center",
   },
@@ -172,12 +188,12 @@ const styles = StyleSheet.create({
     color: theme.colors.primary,
   },
   sectionTitle: {
-    fontSize: 18,
+    fontSize: hp(2.5),
     fontWeight: "bold",
     marginVertical: 20,
   },
   input: {
-    width: screenWidth * 0.9,
+    width: "100%",
     backgroundColor: "white",
     marginBottom: 5,
   },
@@ -190,12 +206,12 @@ const styles = StyleSheet.create({
   },
   errorText: {
     color: "red",
-    fontSize: 12,
+    fontSize: hp(1.5),
     marginLeft: 10,
     marginBottom: 10,
   },
   requiredNote: {
-    fontSize: 12,
+    fontSize: hp(1.5),
     color: "#555",
     textAlign: "center",
   },
