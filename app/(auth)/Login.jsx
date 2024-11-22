@@ -9,7 +9,8 @@ import { Link, useRouter } from "expo-router";
 import { hp, wp } from "../../common";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-import fakeLoginReponse from "../../constants/fakeLoginReponse.json";
+import fakeLoginResponse from "../../constants/fakeLoginResponse.json";
+import fakeGetUserResponse from "../../constants/fakeGetUserResponse.json";
 import { decodeJwt } from "../../utils/jwtUtils";
 import { useAuth } from "../../contexts/AuthContext";
 import { routes } from "../../constants/routes";
@@ -17,7 +18,6 @@ import PressableOpacity from "../../components/PressableOpacity";
 
 const Login = () => {
   const router = useRouter();
-  const ROUTES = routes;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -41,17 +41,22 @@ const Login = () => {
       // });
 
       // Fake Response created using real response
-      const response = fakeLoginReponse;
+      const response = fakeLoginResponse;
       if (!response || response.status !== 200) {
         throw new Error("Unexpected response code");
       }
       const jwtToken = response.body.token;
       const decodedJwt = decodeJwt(jwtToken);
-      const userData = decodedJwt.payload;
+      let userData = {};
+      const userId = decodedJwt.payload.id;
+      if (userId) {
+        const userDataResponse = fakeGetUserResponse;
+        userData = userDataResponse.body;
+      }
       // (To do?): Verify Jwt Signature using public key
       clearToken();
       saveToken(jwtToken, userData);
-      router.replace(ROUTES.STARTING_PAGE);
+      router.replace(routes.STARTING_PAGE);
     } catch (error) {
       if (error.response) {
         switch (error.response.status) {
@@ -80,7 +85,7 @@ const Login = () => {
 
   return (
     <ScreenWrapper bg="white">
-      <StatusBar style="dark" />
+      <StatusBar backgroundColor={theme.colors.primary} />
       <View style={styles.container}>
         <BackButton router={router} />
 
@@ -104,7 +109,7 @@ const Login = () => {
             isPasswordField={true}
             onChangeText={(newPassword) => setPassword(newPassword)}
           />
-          <PressableOpacity onPress={() => router.push(ROUTES.FORGOT_PASSWORD)}>
+          <PressableOpacity onPress={() => router.push(routes.FORGOT_PASSWORD)}>
             <Text style={styles.forgotPassword}>Forgot Password?</Text>
           </PressableOpacity>
 
@@ -115,7 +120,7 @@ const Login = () => {
           <Text style={styles.footerText}>Dont have an account?</Text>
           <Pressable
             onPress={() => {
-              router.push(ROUTES.SIGN_UP);
+              router.push(routes.SIGN_UP);
             }}
           >
             <Text
@@ -146,17 +151,17 @@ const styles = StyleSheet.create({
     paddingVertical: hp(2),
   },
   welcomeText: {
-    height: hp(5),
+    height: hp(5.2),
     fontWeight: theme.fonts.fontWeight.bold,
     color: theme.colors.text,
-    fontSize: theme.fonts.fontSize["3xl"],
+    fontSize: hp(3.8),
   },
   form: {
     gap: 15,
   },
   forgotPassword: {
     textAlign: "right",
-    fontWeight: theme.fonts.semibond,
+    fontWeight: theme.fonts.fontWeight.semibold,
     color: theme.colors.text,
   },
   footer: {
