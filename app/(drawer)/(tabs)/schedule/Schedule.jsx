@@ -165,7 +165,7 @@ const Schedule = () => {
                 buttons={[
                   {
                     buttonStyle: {},
-                    title: "Rechedule Booking",
+                    title: "Reschedule Booking",
                     onPress: () =>
                       handleNavigateToSchedulePickUp({
                         bookingId,

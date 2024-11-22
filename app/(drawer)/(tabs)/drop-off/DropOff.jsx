@@ -140,9 +140,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme.colors.whiteGreen,
   },
-  contentContainer: {
-    paddingBottom: 20,
-  },
   pickerItem: {
     fontSize: hp(1.65),
   },
