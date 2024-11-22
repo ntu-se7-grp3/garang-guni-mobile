@@ -1,5 +1,13 @@
 import React from "react";
-import { ScrollView, View, Text, StyleSheet, Image, Dimensions, StatusBar } from "react-native";
+import {
+  ScrollView,
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Dimensions,
+  StatusBar,
+} from "react-native";
 import { useFocusEffect, router } from "expo-router";
 import { routes } from "../../../../constants/routes";
 import { theme } from "../../../../constants/theme";
@@ -25,16 +33,24 @@ const Home = () => {
 
   return (
     <ScreenWrapper bg={theme.colors.whiteGreen}>
-      <StatusBar backgroundColor="transparent" barStyle="dark-content" translucent />
+      <StatusBar
+        backgroundColor="transparent"
+        barStyle="dark-content"
+        translucent
+      />
 
-      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.contentContainer}
+      >
         {/* Homepage Section */}
         <View style={styles.section}>
           <Text style={styles.headerTitle}>SELL YOUR JUNK,</Text>
           <Text style={styles.headerTitle}>GET PAID CASH!</Text>
           <Image source={homeCoinImage} style={styles.image} />
           <Text style={styles.headerSubtitle}>
-            Your trusted partner for hassle-free junk removal. We offer top rates and convenient pickup services.
+            Your trusted partner for hassle-free junk removal. We offer top
+            rates and convenient pickup services.
           </Text>
         </View>
 
@@ -59,15 +75,12 @@ const Home = () => {
           <Text style={styles.sectionTitle}>READY TO DECLUTTER?</Text>
           <Image source={homeScheduleImage} style={styles.image} />
           <View style={styles.bulletRow}>
-            <Image source={bulletImage} style={styles.bulletIcon} />
             <Text style={styles.bulletText}>1. Sign Into Your Account</Text>
           </View>
           <View style={styles.bulletRow}>
-            <Image source={bulletImage} style={styles.bulletIcon} />
             <Text style={styles.bulletText}>2. Declare All Your Items</Text>
           </View>
           <View style={styles.bulletRow}>
-            <Image source={bulletImage} style={styles.bulletIcon} />
             <Text style={styles.bulletText}>3. Schedule a Pickup Date</Text>
           </View>
           <View style={styles.buttonRow}>
@@ -176,7 +189,7 @@ const styles = StyleSheet.create({
   fullWidthButton: {
     backgroundColor: "white",
     borderWidth: 1,
-    borderColor: "#4CAF50",
+    borderColor: theme.colors.primary,
     borderRadius: 5,
     padding: 12,
     width: "90%",
@@ -184,7 +197,7 @@ const styles = StyleSheet.create({
     marginVertical: 15,
   },
   fullWidthButtonText: {
-    color: "#4CAF50",
+    color: theme.colors.primary,
     fontWeight: "bold",
     fontSize: 16,
     textAlign: "center",
@@ -193,20 +206,20 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
     borderWidth: 1,
-    borderColor: "#4CAF50",
+    borderColor: theme.colors.primary,
     borderRadius: 5,
     paddingVertical: 12,
     marginHorizontal: 5,
   },
   outlinedButtonText: {
-    color: "#4CAF50",
+    color: theme.colors.primary,
     fontWeight: "bold",
     fontSize: 16,
     textAlign: "center",
   },
   filledButton: {
     flex: 1,
-    backgroundColor: "#4CAF50",
+    backgroundColor: theme.colors.primary,
     borderRadius: 5,
     paddingVertical: 12,
     marginHorizontal: 5,
