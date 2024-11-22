@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderWidth: 0.4,
     borderColor: theme.colors.text,
-    borderRadius: theme.radius.xxl,
+    borderRadius: theme.radius.xxs,
     borderCurive: "continuous",
     paddingHorizontal: 18,
     gap: 12,

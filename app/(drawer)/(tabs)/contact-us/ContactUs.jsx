@@ -77,10 +77,10 @@ const ContactUs = () => {
         Call or Whatsapp us at <Text style={styles.highlight}>8888 8888</Text>
       </Text>
       <Text style={{ fontFamily: "System", fontSize: 16 }}>
-        Mon-Fri (9am-6pm)
+        Mon - Fri (9am - 6pm)
       </Text>
       <Text style={{ fontFamily: "System", fontSize: 16 }}>
-        Saturday (9am-12pm)
+        Saturday (9am - 12pm)
       </Text>
 
       <Text style={styles.sectionTitle}>OR DROP US AN EMAIL</Text>
@@ -176,8 +176,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: hp(3),
     fontWeight: "bold",
-    marginTop: 20,
-    marginBottom: 10,
+    marginVertical: 10,
   },
   subtitle: {
     fontSize: hp(2),
@@ -198,8 +197,14 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     marginBottom: 5,
   },
+  requiredNoteContainer: {
+    paddingBottom: 25,
+    width: "100%",
+    alignItems: "flex-end",
+  },
   textArea: {
     height: 100,
+    alignItems: "flex-start",
   },
   errorInput: {
     borderColor: "red",
@@ -214,6 +219,5 @@ const styles = StyleSheet.create({
   requiredNote: {
     fontSize: hp(1.5),
     color: "#555",
-    textAlign: "center",
   },
 });
